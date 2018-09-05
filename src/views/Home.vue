@@ -32,11 +32,12 @@ export default {
       for(var i = 0; i < num; i++) {
         requests.push(axios.get('https://xkcd.now.sh/' + (base - i)));
       }
-      axios.all(requests).then(this.handleResponse(res));
+      axios.all(requests).then(res => (this.handleResponse(res)));
     },
-    handleResponse(res
-    ) {
-      console.log(res);
+    handleResponse(res) {
+      for(var i = 0; i < res.length; i++) {
+        this.comics.push(res[i].data);
+      }
     }
   },
   mounted: function() {
